@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>NovaMart</title>
 
 <style>
 body{
     margin:0;
-    font-family:Arial;
+    font-family:Arial, sans-serif;
     background:#EAEDED;
 }
 
@@ -22,14 +23,16 @@ body{
     flex-wrap:wrap;
 }
 
-.logo-img{
-    height:45px;
+.logo{
+    font-size:28px;
+    font-weight:bold;
+    color:#FF9900;
 }
 
 .nav{
     display:flex;
-    align-items:center;
     gap:10px;
+    align-items:center;
     flex-wrap:wrap;
 }
 
@@ -38,6 +41,7 @@ body{
     border:none;
     color:white;
     cursor:pointer;
+    font-size:15px;
 }
 
 .nav button:hover{
@@ -51,15 +55,19 @@ body{
     border-radius:4px;
 }
 
-/* SECTIONS */
-.section{display:none;}
-.active{display:block;}
+/* Sections */
+.section{
+    display:none;
+}
 
-/* SLIDER */
+.active{
+    display:block;
+}
+
+/* Slider */
 .slider{
     position:relative;
     height:90vh;
-    width:100%;
     overflow:hidden;
 }
 
@@ -70,20 +78,17 @@ body{
     background-size:cover;
     background-position:center;
     opacity:0;
-    transform:scale(1.1);
     transition:1s;
 }
 
 .slide.active{
     opacity:1;
-    transform:scale(1);
 }
 
 .overlay{
-    position:absolute;
     width:100%;
     height:100%;
-    background:linear-gradient(to bottom,rgba(0,0,0,0.3),rgba(0,0,0,0.7));
+    background:rgba(0,0,0,0.5);
     color:white;
     display:flex;
     flex-direction:column;
@@ -92,35 +97,48 @@ body{
     text-align:center;
 }
 
-.overlay h1{font-size:50px;}
-.overlay p{font-size:20px;}
+.overlay h1{
+    font-size:50px;
+    margin:0;
+}
 
-/* PRODUCTS */
+.overlay p{
+    font-size:20px;
+}
+
+/* Products */
 .grid{
     display:grid;
-    grid-template-columns:repeat(auto-fill,minmax(200px,1fr));
+    grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
     gap:20px;
     padding:20px;
 }
 
 .card{
     background:white;
-    padding:15px;
     border-radius:10px;
+    padding:15px;
+    box-shadow:0 2px 8px rgba(0,0,0,0.1);
 }
 
 .card img{
     width:100%;
-    height:150px;
+    height:180px;
     object-fit:cover;
+    border-radius:5px;
 }
 
 .btn{
     width:100%;
     padding:10px;
-    margin-top:5px;
     border:none;
+    margin-top:8px;
     cursor:pointer;
+    border-radius:5px;
+}
+
+.cartbtn{
+    background:#FF9900;
 }
 
 .buy{
@@ -128,15 +146,17 @@ body{
     color:white;
 }
 
-.cartbtn{
-    background:#FF9900;
+.remove{
+    background:red;
+    color:white;
 }
 
-/* INPUT */
-input{
-    width:100%;
-    padding:10px;
-    margin:5px 0;
+#cartList{
+    padding:20px;
+}
+
+#total{
+    padding:20px;
 }
 </style>
 </head>
@@ -146,221 +166,274 @@ input{
 <!-- TOPBAR -->
 <div class="topbar">
 
-    <div>
-        <img src="images/logo.png" class="logo-img">
-    </div>
+    <div class="logo">NovaMart</div>
 
     <div class="nav">
+        <button onclick="showPage('home')">Home</button>
+        <button onclick="showPage('products')">Products</button>
+        <button onclick="showPage('cart')">Cart</button>
 
-        <button onclick="show('home')">Home</button>
-        <button onclick="show('products')">Products</button>
-        <button onclick="show('cart')">Cart</button>
-
-        <input id="searchInput" onkeyup="searchProducts()" placeholder="Search products...">
-
+        <input
+            type="text"
+            id="searchInput"
+            placeholder="Search products..."
+            onkeyup="searchProducts()"
+        >
     </div>
+
 </div>
 
 <!-- HOME -->
 <div id="home" class="section active">
 
-<div class="slider">
+    <div class="slider">
 
-    <div class="slide active" style="background-image:url('images/tag.png')">
-        <div class="overlay">
-            <h1>Welcome to NovaMart</h1>
+        <div class="slide active"
+             style="background-image:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30');">
+            <div class="overlay">
+                <h1>Welcome to NovaMart</h1>
+                <p>Best Deals Everyday</p>
+            </div>
         </div>
-    </div>
 
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1523275335684-37898b6baf30')">
-        <div class="overlay">
-            <h1>Electronics Deals</h1>
-            <p>Up to 60% OFF</p>
+        <div class="slide"
+             style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f');">
+            <div class="overlay">
+                <h1>Fashion Sale</h1>
+                <p>New Arrivals Weekly</p>
+            </div>
         </div>
-    </div>
 
-    <div class="slide" style="background-image:url('https://images.unsplash.com/photo-1512436991641-6745cdb1723f')">
-        <div class="overlay">
-            <h1>Fashion Sale</h1>
-            <p>New Arrivals Weekly</p>
+        <div class="slide"
+             style="background-image:url('https://images.unsplash.com/photo-1505740420928-5e560c06d30e');">
+            <div class="overlay">
+                <h1>Electronics Deals</h1>
+                <p>Up To 60% OFF</p>
+            </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 </div>
 
 <!-- PRODUCTS -->
 <div id="products" class="section">
+
     <h2 style="padding:20px;">Products</h2>
+
     <div id="productList" class="grid"></div>
+
 </div>
 
 <!-- CART -->
 <div id="cart" class="section">
-    <h2 style="padding:20px;">Cart</h2>
+
+    <h2 style="padding:20px;">Shopping Cart</h2>
+
     <div id="cartList"></div>
-    <h3 id="total" style="padding:20px;"></h3>
-</div>
+
+    <h3 id="total"></h3>
 
 </div>
 
 <script>
 
-/* DATA */
 let products = JSON.parse(localStorage.getItem("products")) || [
-    {name:"Math test", price:50, img:"https://via.placeholder.com/200"}
-    {name:"Mouse", price:25, img:"https://via.placeholder.com/200"},
-    {name:"Keyboard", price:70, img:"https://via.placeholder.com/200"},
-    {name:"Phone", price:300, img:"https://via.placeholder.com/200"},
-    {name:"PS5", price:700, img:"https://via.placeholder.com/200"},
-    {name:"Tablet", price:350, img:"https://via.placeholder.com/200"},
+
+    {
+        name:"Mouse",
+        price:25,
+        img:"https://via.placeholder.com/300x200?text=Mouse"
+    },
+
+    {
+        name:"Keyboard",
+        price:70,
+        img:"https://via.placeholder.com/300x200?text=Keyboard"
+    },
+
+    {
+        name:"Phone",
+        price:300,
+        img:"https://via.placeholder.com/300x200?text=Phone"
+    },
+
+    {
+        name:"PS5",
+        price:700,
+        img:"https://via.placeholder.com/300x200?text=PS5"
+    },
+
+    {
+        name:"Tablet",
+        price:350,
+        img:"https://via.placeholder.com/300x200?text=Tablet"
+    }
 
 ];
 
 let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-/* NAV */
-function show(page){
-    document.querySelectorAll(".section").forEach(s=>s.classList.remove("active"));
+/* Navigation */
+function showPage(page){
+
+    document.querySelectorAll(".section").forEach(section=>{
+        section.classList.remove("active");
+    });
+
     document.getElementById(page).classList.add("active");
+
     render();
 }
 
-/* PRODUCTS */
+/* Products */
 function renderProducts(){
+
     let box = document.getElementById("productList");
+
     box.innerHTML = "";
 
-    products.forEach((p,i)=>{
+    products.forEach((product,index)=>{
+
         box.innerHTML += `
         <div class="card">
-            <img src="${p.img}">
-            <h3>${p.name}</h3>
-            <p>$${p.price}</p>
 
-            <button class="btn cartbtn" onclick="addToCart(${i})">
-                Add to Cart
+            <img src="${product.img}" alt="${product.name}">
+
+            <h3>${product.name}</h3>
+
+            <p>$${product.price}</p>
+
+            <button
+                class="btn cartbtn"
+                onclick="addToCart(${index})">
+                Add To Cart
             </button>
 
-            <button class="btn buy" onclick="buyNow('${p.name}', ${p.price})">
+            <button
+                class="btn buy"
+                onclick="buyNow('${product.name}', ${product.price})">
                 Buy Now
             </button>
 
-        </div>`;
+        </div>
+        `;
     });
 }
 
-/* CART */
-function addToCart(i){
-    cart.push(products[i]);
+/* Cart */
+function addToCart(index){
+
+    cart.push(products[index]);
+
     localStorage.setItem("cart", JSON.stringify(cart));
+
     alert("Added to cart");
 }
 
 function renderCart(){
+
     let box = document.getElementById("cartList");
-    box.innerHTML = "";
+
     let total = 0;
 
-    cart.forEach((p,i)=>{
-        total += Number(p.price);
+    box.innerHTML = "";
+
+    cart.forEach((item,index)=>{
+
+        total += Number(item.price);
 
         box.innerHTML += `
         <div class="card">
-            <h3>${p.name}</h3>
-            <p>$${p.price}</p>
 
-            <button onclick="removeFromCart(${i})" style="
-                background:red;
-                color:white;
-                border:none;
-                padding:8px;
-                width:100%;
-                cursor:pointer;
-            ">
+            <h3>${item.name}</h3>
+
+            <p>$${item.price}</p>
+
+            <button
+                class="btn remove"
+                onclick="removeFromCart(${index})">
                 Remove
             </button>
-        </div>`;
+
+        </div>
+        `;
     });
 
-    document.getElementById("total").innerText = "Total: $" + total;
+    document.getElementById("total").innerText =
+        "Total: $" + total;
 }
 
-/* REMOVE FROM CART */
-function removeFromCart(i){
-    cart.splice(i,1);
+function removeFromCart(index){
+
+    cart.splice(index,1);
+
     localStorage.setItem("cart", JSON.stringify(cart));
+
     renderCart();
 }
 
-/* BUY NOW → WHATSAPP */
+/* Search */
+function searchProducts(){
+
+    let value =
+        document.getElementById("searchInput")
+        .value.toLowerCase();
+
+    let cards =
+        document.querySelectorAll("#productList .card");
+
+    cards.forEach(card=>{
+
+        let text =
+            card.querySelector("h3")
+            .innerText.toLowerCase();
+
+        card.style.display =
+            text.includes(value)
+            ? "block"
+            : "none";
+    });
+}
+
+/* WhatsApp Buy */
 function buyNow(name, price){
+
     let phone = "994558530802";
 
-    let message = `🛒 New Order:
+    let message =
+`🛒 New Order
+
 Product: ${name}
 Price: $${price}`;
 
-    let url = `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+    let url =
+`https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
 
-    window.open(url, "_blank");
+    window.open(url,"_blank");
 }
 
-/* ADMIN */
-function renderAdmin(){
-    let box = document.getElementById("adminList");
-    box.innerHTML = "";
-
-    products.forEach((p,i)=>{
-        box.innerHTML += `
-        <div class="card">
-            <h3>${p.name}</h3>
-            <p>$${p.price}</p>
-            <button onclick="deleteProduct(${i})">Delete</button>
-        </div>`;
-    });
-}
-
-function addProduct(){
-    let name = document.getElementById("name").value;
-    let price = document.getElementById("price").value;
-    let img = document.getElementById("img").value;
-
-    products.push({name, price, img});
-    localStorage.setItem("products", JSON.stringify(products));
-    render();
-}
-
-function deleteProduct(i){
-    products.splice(i,1);
-    localStorage.setItem("products", JSON.stringify(products));
-    render();
-}
-
-/* SEARCH */
-function searchProducts(){
-    let value = document.getElementById("searchInput").value.toLowerCase();
-    let cards = document.querySelectorAll("#productList .card");
-
-    cards.forEach(card=>{
-        let name = card.querySelector("h3").innerText.toLowerCase();
-        card.style.display = name.includes(value) ? "block" : "none";
-    });
-}
-
-/* SLIDER */
+/* Slider */
 let slides = document.querySelectorAll(".slide");
-let index = 0;
+
+let currentSlide = 0;
 
 setInterval(()=>{
-    slides.forEach(s=>s.classList.remove("active"));
-    slides[index].classList.add("active");
-    index = (index + 1) % slides.length;
+
+    slides.forEach(slide=>{
+        slide.classList.remove("active");
+    });
+
+    currentSlide =
+        (currentSlide + 1) % slides.length;
+
+    slides[currentSlide].classList.add("active");
+
 },4000);
 
-/* RENDER */
+/* Render */
 function render(){
+
     renderProducts();
     renderCart();
 }
